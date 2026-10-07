@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablero Kotter + KPI — ERP</title>
+  <meta name="description" content="Tablero de seguimiento de los 8 pasos de Kotter y de los KPI del proyecto ERP." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <h1>Tablero de seguimiento</h1>
+        <p>Gestión del cambio (Kotter) y KPI del proyecto ERP</p>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btn-demo" type="button">Cargar datos de ejemplo</button>
+        <button class="btn" id="btn-export" type="button">Exportar JSON</button>
+        <label class="btn" for="input-import">Importar JSON</label>
+        <input type="file" id="input-import" accept="application/json" hidden />
+        <button class="btn btn--danger" id="btn-reset" type="button">Reiniciar</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Resumen general -->
+    <section class="summary" aria-label="Resumen general">
+      <article class="card stat">
+        <span class="stat__label">Avance del plan Kotter</span>
+        <span class="stat__value" id="sum-kotter">0 %</span>
+        <div class="bar"><div class="bar__fill" id="sum-kotter-bar"></div></div>
+        <span class="stat__hint" id="sum-kotter-hint"></span>
+      </article>
+      <article class="card stat">
+        <span class="stat__label">Paso actual</span>
+        <span class="stat__value stat__value--sm" id="sum-paso">—</span>
+        <span class="stat__hint" id="sum-paso-hint"></span>
+      </article>
+      <article class="card stat">
+        <span class="stat__label">KPI en meta</span>
+        <span class="stat__value" id="sum-kpi">0 / 0</span>
+        <div class="lights" id="sum-lights"></div>
+      </article>
+    </section>
+
+    <!-- Pestañas -->
+    <nav class="tabs" role="tablist">
+      <button class="tab is-active" role="tab" data-tab="kotter" aria-selected="true">Los 8 pasos de Kotter</button>
+      <button class="tab" role="tab" data-tab="kpi" aria-selected="false">KPI del producto</button>
+    </nav>
+
+    <!-- Kotter -->
+    <section id="panel-kotter" class="panel" role="tabpanel">
+      <div id="kotter-list"></div>
+    </section>
+
+    <!-- KPI -->
+    <section id="panel-kpi" class="panel" role="tabpanel" hidden>
+      <div class="cat-grid" id="cat-grid"></div>
+
+      <div class="filters">
+        <div class="chips" id="cat-chips"></div>
+        <select id="state-filter" aria-label="Filtrar por estado">
+          <option value="todos">Todos los estados</option>
+          <option value="verde">En meta</option>
+          <option value="ambar">Cerca de la meta</option>
+          <option value="rojo">Fuera de meta</option>
+          <option value="sin-dato">Sin dato</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table class="kpi-table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>KPI</th>
+              <th class="hide-sm">Fórmula / medición</th>
+              <th>Meta</th>
+              <th class="hide-sm">Frecuencia</th>
+              <th>Valor actual</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="kpi-body"></tbody>
+        </table>
+      </div>
+      <p class="legend">
+        <span class="pill pill--verde">En meta</span>
+        <span class="pill pill--ambar">Dentro del 10 % de tolerancia</span>
+        <span class="pill pill--rojo">Fuera de meta</span>
+        <span class="pill pill--sin-dato">Sin dato</span>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Sistemas de Información Integrados — UPAO · Liu Dai, Yan Hui · 2026
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/semaforo.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
